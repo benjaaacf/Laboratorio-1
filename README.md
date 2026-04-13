@@ -21,7 +21,7 @@ Durante el experimento, se programaron diversos comportamientos controlando la v
 * **Círculo:** Se mantuvo una relación asimétrica constante durante el tiempo suficiente para cerrar el trazado perimetral de los 360 grados.
 * **Figura en 8:** Se concatenaron movimientos curvos invirtiendo temporalmente los valores de los motores. Primero un giro a la derecha, seguido de un giro a la izquierda por el doble de tiempo  y cerrando el ciclo nuevamente hacia la derecha.
 
-
+## Preguntas
 ¿Qué ocurre cuando ambas ruedas tienen la misma velocidad?
 El robot describe un movimiento en línea recta. Al no haber diferencia de velocidad entre la rueda izquierda y la derecha, no se genera velocidad angular (giro), por lo que el robot simplemente avanza o retrocede de forma lineal sin desviarse.
 
@@ -33,3 +33,131 @@ El robot experimentará una rotación en el lugar (o giro sobre su propio eje ce
 
 ¿Qué tipo de movimiento permite dibujar un círculo?
 Se requiere un movimiento curvo constante y sostenido. Para lograrlo, debes asignar velocidades diferentes a cada rueda (ambas en el mismo sentido) y mantener esos mismos valores fijos durante el tiempo necesario para completar los 360 grados. La diferencia entre las velocidades de ambas ruedas es lo que determinará el radio del círculo trazado.
+
+
+
+## Linea Recta:
+
+from controller import Robot
+
+robot = Robot()
+timestep = int(robot.getBasicTimeStep())
+
+left_motor = robot.getDevice('left wheel motor')
+right_motor = robot.getDevice('right wheel motor')
+left_motor.setPosition(float('inf'))
+right_motor.setPosition(float('inf'))
+
+def mover(v_izq, v_der, tiempo_segundos):
+    left_motor.setVelocity(v_izq)
+    right_motor.setVelocity(v_der)
+    
+    pasos = int((tiempo_segundos * 1000) / timestep)
+    
+    for _ in range(pasos):
+        if robot.step(timestep) == -1:
+            break
+
+    left_motor.setVelocity(0.0)
+    right_motor.setVelocity(0.0)
+
+def dibujar_recta():
+    print("Dibujando línea recta...")
+    mover(3.14, 3.14, 10.0)
+
+dibujar_recta()
+
+## Curva:
+
+from controller import Robot
+
+robot = Robot()
+timestep = int(robot.getBasicTimeStep())
+
+left_motor = robot.getDevice('left wheel motor')
+right_motor = robot.getDevice('right wheel motor')
+left_motor.setPosition(float('inf'))
+right_motor.setPosition(float('inf'))
+
+def mover(v_izq, v_der, tiempo_segundos):
+    left_motor.setVelocity(v_izq)
+    right_motor.setVelocity(v_der)
+    
+    pasos = int((tiempo_segundos * 1000) / timestep)
+    
+    for _ in range(pasos):
+        if robot.step(timestep) == -1:
+            break
+
+    left_motor.setVelocity(0.0)
+    right_motor.setVelocity(0.0)
+
+def dibujar_curva():
+    print("Dibujando curva...")
+    mover(4.0, 2.0, 3.0)
+
+dibujar_curva()
+
+## Circulo:
+
+from controller import Robot
+
+robot = Robot()
+timestep = int(robot.getBasicTimeStep())
+
+left_motor = robot.getDevice('left wheel motor')
+right_motor = robot.getDevice('right wheel motor')
+left_motor.setPosition(float('inf'))
+right_motor.setPosition(float('inf'))
+
+def mover(v_izq, v_der, tiempo_segundos):
+    left_motor.setVelocity(v_izq)
+    right_motor.setVelocity(v_der)
+    
+    pasos = int((tiempo_segundos * 1000) / timestep)
+    
+    for _ in range(pasos):
+        if robot.step(timestep) == -1:
+            break
+
+    left_motor.setVelocity(0.0)
+    right_motor.setVelocity(0.0)
+
+def dibujar_circulo():
+    print("Dibujando círculo...")
+    mover(3.14, 0.5, 6.6) 
+
+dibujar_circulo()
+
+## Movimiento en 8:
+
+from controller import Robot
+
+robot = Robot()
+timestep = int(robot.getBasicTimeStep())
+
+left_motor = robot.getDevice('left wheel motor')
+right_motor = robot.getDevice('right wheel motor')
+left_motor.setPosition(float('inf'))
+right_motor.setPosition(float('inf'))
+
+def mover(v_izq, v_der, tiempo_segundos):
+    left_motor.setVelocity(v_izq)
+    right_motor.setVelocity(v_der)
+    
+    pasos = int((tiempo_segundos * 1000) / timestep)
+    
+    for _ in range(pasos):
+        if robot.step(timestep) == -1:
+            break
+
+    left_motor.setVelocity(0.0)
+    right_motor.setVelocity(0.0)
+
+def dibujar_circulo():
+    print("Dibujando círculo...")
+    mover(3.14, 0.5, 3.1) 
+    mover(0.5, 3.14, 6.2)
+    mover(3.14, 0.5, 3.1)
+
+dibujar_circulo()
