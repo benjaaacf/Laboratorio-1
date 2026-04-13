@@ -2,6 +2,8 @@
 
 Enlance Videos: https://drive.google.com/drive/folders/1mWX6-7KfL8oPMrG5tmV3BNZMsXpLNIUr?usp=drive_link
 
+Integrantes: Javier Caamaño, Benjamin Caballeria, Diego Espinosa, Matias Reyes
+
 ## Descripción del laboratorio
 Este laboratorio tiene como objetivo comprender el comportamiento cinemático de un robot móvil de tracción diferencial utilizando el simulador Webots. 
 Mediante el control de los actuadores (motores de las ruedas izquierda y derecha), exploramos cómo las distintas velocidades afectan el movimiento del robot, 
